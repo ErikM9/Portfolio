@@ -1,0 +1,49 @@
+/* Sets a 10px root font size */
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.4;
+  color: #cfd8dc;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Layered gradients sit over a navy background colour, which fills in wherever iOS Safari ignores the fixed attachment */
+  background-color: #081020;
+  background-image:
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      rgba(0, 0, 0, 0) 3px,
+      rgba(0, 0, 0, 0) 6px
+    ),
+    radial-gradient(
+      900px 500px at 10% 0%,
+      rgba(0, 212, 255, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 400px at 90% 20%,
+      rgba(0, 120, 255, 0.14),
+      transparent 65%
+    ),
+    linear-gradient(135deg, #040c1a 0%, #081020 45%, #050d18 100%);
+
+  background-attachment: fixed;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Clamps both scrollers on the one-screen desktop layout, so the zoom's sub-pixel remainder cannot add a scrollbar */
+@media screen and (min-width: 1201px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,443 @@
+.page {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Decorative code-editor tags sit around the page */
+.top-tags {
+  bottom: auto;
+  top: 25px;
+}
+
+.top-tag-html {
+  top: 5px;
+  margin-left: -20px;
+}
+
+.tags {
+  color: #00d4ff;
+  opacity: 0.6;
+  position: absolute;
+  bottom: 0;
+  left: 120px;
+  font-size: 18px;
+  font-family: 'La Belle Aurore', cursive;
+}
+
+.bottom-tag-html {
+  margin-left: -20px;
+}
+
+/* The shared page wrapper fades in one second after load, while the loader fades out */
+.container {
+  width: 100%;
+  height: 90%;
+  min-height: 566px;
+  position: absolute;
+  opacity: 0;
+  top: 5%;
+  margin: 0 auto;
+  z-index: 1;
+  transform-style: preserve-3d;
+  animation: fadeIn 1s forwards;
+  animation-delay: 1s;
+}
+
+/* The glassmorphism button's pseudo-element sheen lights up on hover */
+.container .flat-button {
+  --cp-accent: #00d4ff;
+
+  color: var(--cp-accent);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2.4px;
+  font-family: 'Coolvetica';
+  text-decoration: none;
+  padding: 10px 18px;
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  animation: fadeIn 1s 1.8s backwards;
+  white-space: nowrap;
+  display: inline-block;
+  margin-top: 32px;
+  margin-bottom: 36px;
+
+  position: relative;
+  isolation: isolate;
+  border-radius: 0;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    filter 0.35s ease,
+    color 0.35s ease,
+    text-shadow 0.35s ease;
+
+  background: rgba(255, 255, 255, 0.004);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.01),
+    0 4px 10px rgba(0, 0, 0, 0.14);
+
+  backdrop-filter: blur(6px) saturate(1.04);
+  -webkit-backdrop-filter: blur(6px) saturate(1.04);
+
+  text-shadow:
+    0 0 10px rgba(0, 212, 255, 0.08),
+    0 0 18px rgba(0, 212, 255, 0.015);
+
+  /* The glass sheen shows faintly at rest */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+    pointer-events: none;
+    opacity: 0.55;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.02) 52%,
+        rgba(255, 255, 255, 0)
+      ),
+      radial-gradient(
+        340px 200px at 18% 22%,
+        rgba(255, 255, 255, 0.022),
+        transparent 72%
+      ),
+      radial-gradient(
+        320px 190px at 84% 86%,
+        rgba(255, 255, 255, 0.018),
+        transparent 78%
+      );
+    mix-blend-mode: overlay;
+    transition: opacity 0.35s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+    pointer-events: none;
+    opacity: 0.32;
+    background:
+      radial-gradient(
+        220px 120px at 30% 72%,
+        rgba(255, 255, 255, 0.016),
+        transparent 72%
+      ),
+      radial-gradient(
+        260px 130px at 78% 24%,
+        rgba(255, 255, 255, 0.014),
+        transparent 74%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.022),
+        rgba(255, 255, 255, 0) 45%,
+        rgba(255, 255, 255, 0.016)
+      );
+    mix-blend-mode: overlay;
+    transition: opacity 0.35s ease;
+  }
+
+  &:hover {
+    border-color: rgba(0, 212, 255, 0.7);
+    color: var(--cp-accent);
+    filter: saturate(1.04) brightness(1.04);
+
+    /* On hover, scanlines, a cyan gradient and a glow are layered over a dark base */
+    background:
+      repeating-linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.024) 0px,
+        rgba(255, 255, 255, 0.024) 1px,
+        rgba(0, 0, 0, 0) 3px,
+        rgba(0, 0, 0, 0) 6px
+      ),
+      linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.1) 0%,
+        rgba(0, 212, 255, 0.055) 35%,
+        rgba(74, 96, 128, 0.042) 65%,
+        rgba(0, 212, 255, 0.085) 100%
+      ),
+      radial-gradient(
+        700px 280px at 0% 0%,
+        rgba(0, 212, 255, 0.17),
+        transparent 60%
+      ),
+      linear-gradient(180deg, #0e1828 0%, #081020 100%);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.09),
+      0 10px 28px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(0, 212, 255, 0.1),
+      0 0 14px rgba(0, 212, 255, 0.08);
+
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.7),
+      0 0 8px rgba(255, 255, 255, 0.3),
+      0 0 18px rgba(0, 212, 255, 0.55),
+      0 0 38px rgba(0, 212, 255, 0.35),
+      0 0 62px rgba(0, 212, 255, 0.18),
+      0 0 96px rgba(74, 96, 128, 0.1);
+  }
+
+  &:hover::before {
+    opacity: 0.92;
+  }
+
+  &:hover::after {
+    opacity: 0.9;
+  }
+
+  /* A cyan outline, like the menu buttons', shows keyboard focus clearly */
+  &:focus-visible {
+    outline: 2px solid rgba(0, 212, 255, 0.7);
+    outline-offset: 4px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.09),
+      0 18px 46px rgba(0, 0, 0, 0.5),
+      0 0 0 2px rgba(0, 212, 255, 0.22),
+      0 0 0 4px rgba(74, 96, 128, 0.18);
+  }
+}
+
+/* About and Portfolio share these styles, and the h1 class gives About's h2 the same look, <h1>/</h1> labels included */
+.container.about-page,
+.container.portfolio-page {
+  h1,
+  .h1 {
+    font-size: 56px;
+    line-height: 53px;
+    margin: 0 0 40px 0;
+    font-family: 'Coolvetica';
+    font-weight: 400;
+    color: #00d4ff;
+    position: relative;
+    animation: pulse 1s;
+
+    &:before {
+      content: '<h1>';
+      /* Empty alt text keeps screen readers from reading the decorator, while older browsers keep the plain value above */
+      content: '<h1>' / '';
+      font-family: 'La Belle Aurore', cursive;
+      color: #00d4ff;
+      font-size: 18px;
+      position: absolute;
+      margin-top: -30px;
+      left: -20px;
+      opacity: 0.6;
+    }
+
+    &:after {
+      content: '</h1>';
+      content: '</h1>' / '';
+      font-family: 'La Belle Aurore', cursive;
+      color: #00d4ff;
+      font-size: 18px;
+      position: absolute;
+      margin-top: 18px;
+      margin-left: 10px;
+      opacity: 0.6;
+      animation: fadeIn 1s 1.7s backwards;
+    }
+  }
+
+  p {
+    font-size: 13px;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 300;
+    max-width: fit-content;
+    animation: pulse 1s;
+
+    &:nth-of-type(1) {
+      animation-delay: 1.1s;
+    }
+    &:nth-of-type(2) {
+      animation-delay: 1.2s;
+    }
+    &:nth-of-type(3) {
+      animation-delay: 1.3s;
+    }
+  }
+
+  /* Draws the <ul>/</ul> labels around the card grid */
+  ul.code-list {
+    list-style: none;
+    margin: 18px 0 40px 0;
+    padding: 0;
+    position: relative;
+    animation: pulse 1s;
+
+    &:before {
+      content: '<ul>';
+      content: '<ul>' / '';
+      font-family: 'La Belle Aurore', cursive;
+      color: #00d4ff;
+      font-size: 18px;
+      position: absolute;
+      top: -27px;
+      left: 5px;
+      opacity: 0.6;
+    }
+
+    &:after {
+      content: '</ul>';
+      content: '</ul>' / '';
+      font-family: 'La Belle Aurore', cursive;
+      color: #00d4ff;
+      font-size: 18px;
+      position: absolute;
+      bottom: -35px;
+      left: 0;
+      opacity: 0.6;
+      animation: fadeIn 1s 1.7s backwards;
+    }
+  }
+
+  /* The text zone is centred vertically with top: 50% and a translate */
+  .text-zone {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 35%;
+    max-height: 90%;
+  }
+
+  .text-animate-hover {
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container .flat-button,
+  .container.about-page ul.code-list,
+  .container.portfolio-page ul.code-list {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Stops these animations and pins the elements at full opacity, so turning animation off never hides content */
+  .container,
+  .container.about-page h1,
+  .container.about-page .h1,
+  .container.portfolio-page h1,
+  .container.about-page p,
+  .container.portfolio-page p,
+  .container.about-page ul.code-list,
+  .container.portfolio-page ul.code-list {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Holds the decorator labels at their visible state too */
+  .tags,
+  .container.about-page h1::before,
+  .container.about-page h1::after,
+  .container.about-page .h1::before,
+  .container.about-page .h1::after,
+  .container.portfolio-page h1::before,
+  .container.portfolio-page h1::after,
+  .container.about-page ul.code-list::before,
+  .container.about-page ul.code-list::after,
+  .container.portfolio-page ul.code-list::before,
+  .container.portfolio-page ul.code-list::after {
+    animation: none !important;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .page {
+    position: initial;
+    width: 100%;
+    height: auto;
+    left: 0;
+    overflow: visible;
+  }
+
+  /* The tag overlays have no room in the single-column layout */
+  .tags {
+    display: none;
+  }
+
+  .container {
+    position: initial;
+    height: auto;
+    min-height: auto;
+
+    &.about-page,
+    &.portfolio-page {
+      /* A compact centred column keeps text off the left edge */
+      .text-zone {
+        position: initial;
+        transform: none;
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+        display: block;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+
+      /* The headings shrink, with the decorators pulled inside the padding so they are not clipped */
+      h1,
+      .h1 {
+        font-size: 40px;
+        line-height: 40px;
+        margin-bottom: 32px;
+
+        &:before {
+          left: 0;
+          margin-top: -26px;
+        }
+
+        &:after {
+          margin-top: 14px;
+          margin-left: 4px;
+        }
+      }
+    }
+
+    &.portfolio-page {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  /* The button is centred on mobile with a tighter bottom margin */
+  .container .flat-button {
+    display: block;
+    width: fit-content;
+    margin: 24px auto 12px;
+  }
+
+  /* The cube has no room beside the text on phones, so only Home shows it there */
+  .stage-cube-cont {
+    display: none;
+  }
+
+  .container.about-page ul.code-list,
+  .container.portfolio-page ul.code-list {
+    margin-top: 10px;
+
+    &:before {
+      left: 0;
+    }
+    &:after {
+      left: 0;
+    }
+  }
+}

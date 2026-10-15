@@ -1,0 +1,252 @@
+.nav-bar {
+  background: #090e1c;
+  width: 70px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  min-height: 500px;
+  overflow-x: clip;
+
+  nav {
+    display: block;
+    text-align: center;
+    position: absolute;
+    height: 210px;
+    width: 100%;
+
+    a {
+      font-size: 22px;
+      color: #4a6080;
+      display: block;
+      line-height: 51px;
+      height: 51px;
+      position: relative;
+      text-decoration: none;
+
+      /* The icon fades out on hover as the ::after label fades in */
+      svg {
+        transition: opacity 0.3s ease-out;
+      }
+
+      &:hover {
+        color: #00d4ff;
+
+        svg {
+          opacity: 0;
+        }
+
+        &:after {
+          opacity: 1;
+        }
+      }
+
+      &:after {
+        content: '';
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        text-align: center;
+        opacity: 0;
+        transition: all 0.3s ease-out;
+      }
+
+      &:first-child {
+        &:after {
+          content: 'HOME';
+        }
+      }
+    }
+
+    a.about-link {
+      &:after {
+        content: 'ABOUT';
+      }
+    }
+
+    a.portfolio-link {
+      &:after {
+        content: 'PROJECTS';
+      }
+    }
+
+    /* The active page keeps its icon cyan */
+    a.active {
+      svg {
+        color: #00d4ff;
+      }
+    }
+  }
+
+  /* The overlay's social icons are hidden on desktop, where the bottom strip shows instead */
+  .mobile-social {
+    display: none;
+  }
+
+  /* The desktop social strip is pinned to the bottom */
+  > ul {
+    position: absolute;
+    bottom: 14px;
+    width: 100%;
+    display: block;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    margin: 0;
+
+    li {
+      a {
+        padding: 7px 0;
+        display: block;
+        font-size: 15px;
+        line-height: 16px;
+        color: #4a6080;
+      }
+
+      &:hover {
+        .anchor-icon {
+          color: #00d4ff;
+        }
+      }
+    }
+  }
+}
+
+/* The hamburger and close buttons are reset to bare icons and show only on mobile */
+.hamburger-icon,
+.close-icon {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  cursor: pointer;
+  line-height: 0;
+
+  &:focus-visible {
+    outline: 2px solid rgba(0, 212, 255, 0.7);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .nav-bar {
+    background: transparent;
+    position: initial;
+    height: auto;
+    min-height: auto;
+
+    /* The desktop nav and social strip are hidden, replaced by the mobile panel */
+    > ul,
+    nav {
+      display: none;
+    }
+
+    /* The nav opens as a top sheet over the hamburger, with the close button in the same spot */
+    nav {
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: #090e1c;
+      height: auto;
+      margin: 0;
+      z-index: 6;
+      position: fixed;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      border-bottom: 1px solid #10182b;
+
+      /* The open panel is a centred flex column with even gaps */
+      &.mobile-show {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding: 22px 0 30px;
+      }
+
+      /* Icon and label sit inline, with the label dominant */
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        line-height: 1;
+        font-size: 24px;
+        color: #4a6080;
+      }
+
+      a:after {
+        opacity: 1;
+        position: initial;
+        width: auto;
+        margin-left: 14px;
+        font-size: 19px;
+      }
+
+      a svg {
+        opacity: 1 !important;
+      }
+
+      /* The whole row turns cyan on tap or hover */
+      a:hover,
+      a:active {
+        color: #00d4ff;
+
+        svg {
+          color: #00d4ff;
+        }
+      }
+
+      /* The social icons form a centred row at the bottom of the panel */
+      .mobile-social {
+        display: block;
+
+        ul {
+          display: flex;
+          justify-content: center;
+          gap: 26px;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+
+        a {
+          display: flex;
+          font-size: 22px;
+          color: #4a6080;
+
+          &:after {
+            display: none;
+          }
+
+          &:hover,
+          &:active {
+            color: #00d4ff;
+
+            .anchor-icon {
+              color: #00d4ff;
+            }
+          }
+        }
+      }
+    }
+
+    /* Fixed positioning and a raised z-index keep the hamburger above the headings and within reach while scrolling */
+    .hamburger-icon,
+    .close-icon {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      display: block;
+      z-index: 5;
+    }
+  }
+}
