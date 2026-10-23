@@ -1,0 +1,160 @@
+/* Relative positioning anchors the <p>/</p> pseudo-element decorators to each block */
+.container.about-page .about-text,
+.container.about-page .contact-text {
+  position: relative;
+}
+
+/* Leaves space before the Contact heading which follows */
+.container.about-page .about-text {
+  margin-bottom: 57px;
+}
+
+.container.about-page .about-text::before,
+.container.about-page .contact-text::before {
+  content: '<p>';
+  /* Empty alt text keeps screen readers from reading the decorator, while older browsers keep the plain value above */
+  content: '<p>' / '';
+  font-family: 'La Belle Aurore', cursive;
+  color: #00d4ff;
+  font-size: 18px;
+  position: absolute;
+  top: -26px;
+  left: -20px;
+  opacity: 0.6;
+}
+
+.container.about-page .about-text::after,
+.container.about-page .contact-text::after {
+  content: '</p>';
+  content: '</p>' / '';
+  font-family: 'La Belle Aurore', cursive;
+  color: #00d4ff;
+  font-size: 18px;
+  position: absolute;
+  bottom: -26px;
+  left: -20px;
+  opacity: 0.6;
+  animation: fadeIn 1s 1.7s backwards;
+}
+
+/* Sets the bio in a monospace font */
+.container.about-page .about-text p,
+.container.about-page .contact-text p {
+  font-family:
+    'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', 'Fira Code', monospace;
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.1px;
+  color: #eaeaea;
+  opacity: 0.95;
+  margin: 0 0 18px 0;
+}
+
+/* Tightens the spacing of the short contact lines */
+.container.about-page .contact-text p {
+  margin: 0 0 6px 0;
+}
+
+/* Nudges the text zone down towards the vertical centre */
+.container.about-page .text-zone {
+  margin-top: 12px;
+}
+
+/* Keeps the return button in line with the one on the Portfolio page */
+.container.about-page .text-zone .flat-button {
+  margin-top: 48px;
+}
+
+/* On mobile the decorators move inside the padding and the type tightens towards a single screen */
+@media screen and (max-width: 1200px) {
+  .container.about-page .about-text::before,
+  .container.about-page .contact-text::before,
+  .container.about-page .about-text::after,
+  .container.about-page .contact-text::after {
+    left: 0;
+  }
+
+  /* Shrinks the About page's headings on mobile */
+  .container.about-page .text-zone h1,
+  .container.about-page .text-zone .h1 {
+    font-size: 32px;
+    line-height: 32px;
+    margin-bottom: 20px;
+
+    &:before {
+      margin-top: -24px;
+    }
+
+    &:after {
+      margin-top: 10px;
+    }
+  }
+
+  .container.about-page .about-text {
+    margin-bottom: 34px;
+  }
+
+  .container.about-page .about-text p,
+  .container.about-page .contact-text p {
+    font-size: 13.5px;
+    line-height: 1.4;
+    margin: 0 0 12px 0;
+  }
+
+  .container.about-page .contact-text p {
+    margin: 0 0 5px 0;
+  }
+
+  /* Without the last line's margin the block ends on the text, so </p> mirrors <p> */
+  .container.about-page .about-text p:last-child,
+  .container.about-page .contact-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .container.about-page .text-zone .flat-button {
+    margin: 28px auto 8px;
+  }
+
+  /* A flex column spreads the sections down one phone screen */
+  .App .container.about-page .text-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 100vh;
+    min-height: var(--mobile-vh, 100svh);
+    padding-top: 36px;
+    padding-bottom: 6px;
+    margin-top: 0;
+  }
+}
+
+/* Past the reference width the cube scales up gently with --wide-scale to match the logo */
+@media screen and (min-width: 1808px) {
+  .about-page .stage-cube-cont {
+    transform: scale(var(--wide-scale, 1));
+  }
+}
+
+/* Short landscape screens flow and scroll, with real margins so the hanging decorators have room */
+@media screen and (max-width: 1200px) and (orientation: landscape) {
+  .App .container.about-page .text-zone {
+    display: block;
+    min-height: 0;
+    padding-top: 34px;
+    padding-bottom: 14px;
+  }
+
+  .container.about-page .text-zone h1,
+  .container.about-page .text-zone .h1 {
+    margin-bottom: 56px;
+  }
+
+  .container.about-page .about-text {
+    margin-bottom: 60px;
+  }
+
+  .container.about-page .text-zone .flat-button {
+    margin: 48px auto 12px;
+  }
+}

@@ -1,0 +1,51 @@
+@use 'sass:math';
+
+/* Each letter bounces in, with the _N classes setting its delay */
+.text-animate {
+  display: inline-block;
+  opacity: 0;
+  animation: bounceIn 1s forwards;
+  animation-delay: 1s;
+  min-width: 10px;
+  color: #fff;
+}
+
+/* After the entrance the letters stay visible and play rubberBand only when hovered */
+.text-animate-hover {
+  min-width: 10px;
+  display: inline-block;
+  animation-fill-mode: both;
+  color: #fff;
+
+  &:hover {
+    animation: rubberBand 1s;
+    color: #fff;
+  }
+}
+
+/* Staggers the entrance delay across the classes _1 to _45 */
+@for $i from 1 through 45 {
+  .text-animate._#{$i} {
+    animation-delay: #{math.div($i, 10)}s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-animate,
+  .text-animate-hover {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .text-animate-hover:hover {
+    animation: none !important;
+  }
+}
+
+/* An em-based minimum width lets the width of a space follow the font size */
+@media screen and (max-width: 1200px) {
+  .text-animate,
+  .text-animate-hover {
+    min-width: 0.18em;
+  }
+}
