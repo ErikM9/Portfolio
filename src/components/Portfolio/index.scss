@@ -1,0 +1,478 @@
+.portfolio-page {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+
+  /* The accent colours the titles, borders and button text, and the two backgrounds shade each card from top to bottom */
+  --cp-accent: #00d4ff;
+  --cp-bg1: #0e1828;
+  --cp-bg2: #081020;
+
+  /* The cards sit in five columns on desktop, held to a constant effective width by the app zoom */
+  .button-card-container {
+    width: 100%;
+    margin: 8px auto 40px auto;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  /* Each card has a fixed height and four stacked gradients which build a cyan glow over navy */
+  .button-card {
+    position: relative;
+    height: 176px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* Rises and scales in after the loader, staggered per card so the grid cascades */
+    animation: cardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: 1s;
+
+    border-radius: 14px;
+    border: 1px solid rgba(0, 212, 255, 0.45);
+
+    background:
+      repeating-linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.03) 0px,
+        rgba(255, 255, 255, 0.03) 1px,
+        rgba(0, 0, 0, 0) 3px,
+        rgba(0, 0, 0, 0) 6px
+      ),
+      linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.1) 0%,
+        rgba(0, 212, 255, 0.06) 35%,
+        rgba(74, 96, 128, 0.04) 65%,
+        rgba(0, 212, 255, 0.08) 100%
+      ),
+      radial-gradient(
+        700px 280px at 0% 0%,
+        rgba(0, 212, 255, 0.18),
+        transparent 60%
+      ),
+      linear-gradient(180deg, var(--cp-bg1) 0%, var(--cp-bg2) 100%);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      0 14px 34px rgba(0, 0, 0, 0.45);
+
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease,
+      border-color 0.35s ease,
+      background 0.35s ease,
+      filter 0.35s ease;
+
+    /* A cyan sweep shows on hover */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      pointer-events: none;
+      opacity: 0;
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 212, 255, 0.22),
+          transparent
+        ),
+        linear-gradient(
+          180deg,
+          rgba(0, 212, 255, 0.1),
+          transparent 35%,
+          rgba(74, 96, 128, 0.08)
+        );
+      mix-blend-mode: screen;
+      transition: opacity 0.35s ease;
+    }
+
+    /* Eight gradient segments draw the corner brackets */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border-radius: 12px;
+      pointer-events: none;
+      background:
+        linear-gradient(var(--cp-accent), var(--cp-accent)) left top / 18px 2px
+          no-repeat,
+        linear-gradient(var(--cp-accent), var(--cp-accent)) left top / 2px 18px
+          no-repeat,
+        linear-gradient(var(--cp-accent), var(--cp-accent)) right top / 18px 2px
+          no-repeat,
+        linear-gradient(var(--cp-accent), var(--cp-accent)) right top / 2px 18px
+          no-repeat,
+        linear-gradient(var(--cp-accent), var(--cp-accent)) left bottom / 18px
+          2px no-repeat,
+        linear-gradient(var(--cp-accent), var(--cp-accent)) left bottom / 2px
+          18px no-repeat,
+        linear-gradient(var(--cp-accent), var(--cp-accent)) right bottom / 18px
+          2px no-repeat,
+        linear-gradient(var(--cp-accent), var(--cp-accent)) right bottom / 2px
+          18px no-repeat;
+
+      opacity: 0.55;
+      filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.2));
+      transition:
+        opacity 0.35s ease,
+        filter 0.35s ease;
+    }
+  }
+
+  /* Each card's entrance delay steps up from the one-second base */
+  .button-card:nth-child(1) {
+    animation-delay: 1s;
+  }
+  .button-card:nth-child(2) {
+    animation-delay: 1.06s;
+  }
+  .button-card:nth-child(3) {
+    animation-delay: 1.12s;
+  }
+  .button-card:nth-child(4) {
+    animation-delay: 1.18s;
+  }
+  .button-card:nth-child(5) {
+    animation-delay: 1.24s;
+  }
+  .button-card:nth-child(6) {
+    animation-delay: 1.3s;
+  }
+  .button-card:nth-child(7) {
+    animation-delay: 1.36s;
+  }
+  .button-card:nth-child(8) {
+    animation-delay: 1.42s;
+  }
+  .button-card:nth-child(9) {
+    animation-delay: 1.48s;
+  }
+  .button-card:nth-child(10) {
+    animation-delay: 1.54s;
+  }
+
+  .button-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 212, 255, 0.9);
+    filter: saturate(1.05);
+
+    background:
+      repeating-linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.035) 0px,
+        rgba(255, 255, 255, 0.035) 1px,
+        rgba(0, 0, 0, 0) 3px,
+        rgba(0, 0, 0, 0) 6px
+      ),
+      linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.14) 0%,
+        rgba(0, 212, 255, 0.08) 35%,
+        rgba(74, 96, 128, 0.06) 65%,
+        rgba(0, 212, 255, 0.12) 100%
+      ),
+      radial-gradient(
+        700px 280px at 0% 0%,
+        rgba(0, 212, 255, 0.26),
+        transparent 60%
+      ),
+      linear-gradient(180deg, #142030 0%, #0c1828 100%);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 18px 46px rgba(0, 0, 0, 0.52),
+      0 0 0 1px rgba(0, 212, 255, 0.18),
+      0 0 26px rgba(0, 212, 255, 0.14);
+  }
+
+  .button-card:hover::before {
+    opacity: 0.9;
+  }
+
+  .button-card:hover::after {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.25))
+      drop-shadow(0 0 18px rgba(74, 96, 128, 0.08));
+  }
+
+  /* The padding reserves room for the pinned title and the hover buttons */
+  .card-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: visible;
+    padding-top: 42px;
+    padding-bottom: 51px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* The title is pinned to the top, so it clears a description of any length */
+  .card-title {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    text-align: center;
+    font-family:
+      'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', 'Fira Code', monospace;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--cp-accent);
+    letter-spacing: 0.35px;
+    margin: 0;
+    padding: 6px 10px 0;
+
+    /* Both classes share the bounceIn entrance, and a hovered letter swaps it for rubberBand until the pointer leaves */
+    .text-animate,
+    .text-animate-hover {
+      text-decoration: none;
+      color: var(--cp-accent);
+      display: inline-block;
+      white-space: nowrap;
+      opacity: 0;
+      animation: bounceIn 1s forwards;
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.22);
+    }
+
+    .text-animate-hover:hover {
+      animation: rubberBand 1s;
+    }
+  }
+
+  .card-description.fancy-description {
+    font-family: 'Inter Accent', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    text-wrap: balance;
+    line-height: 1.35;
+    color: #f0f0f0;
+    opacity: 0.97;
+    letter-spacing: -0.3px;
+    word-spacing: -0.5px;
+    text-align: center;
+    padding: 4px 22px 0;
+    margin-top: 4px;
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+    display: block;
+  }
+
+  /* The buttons are hidden at rest and fade in when the card is hovered or tabbed into, taking clicks only while shown */
+  .card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 13.5px 14px 19px;
+    margin-top: auto;
+    opacity: 0;
+    transform: translateY(4px);
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  /* Only focus from the keyboard counts, as a button keeps the focus of a click after its link opens in another tab */
+  .button-card:hover .card-buttons,
+  .button-card:has(:focus-visible) .card-buttons {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Buttons take the page font, which they would not inherit by default */
+  .card-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    color: var(--cp-accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    transition:
+      color 0.25s ease,
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      text-shadow 0.25s ease;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.18);
+  }
+
+  /* A radial glow shows behind the button text on hover */
+  .card-btn::before {
+    content: '';
+    position: absolute;
+    inset: -10px -14px;
+    border-radius: 10px;
+    pointer-events: none;
+    opacity: 0;
+    background:
+      radial-gradient(
+        120px 40px at 50% 50%,
+        rgba(0, 212, 255, 0.1),
+        transparent 60%
+      ),
+      radial-gradient(
+        120px 40px at 50% 50%,
+        rgba(74, 96, 128, 0.06),
+        transparent 65%
+      );
+    transition: opacity 0.25s ease;
+  }
+
+  .card-btn:hover {
+    color: var(--cp-accent);
+    transform: translateY(-0.5px);
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.6),
+      0 0 8px rgba(255, 255, 255, 0.2),
+      0 0 16px rgba(0, 212, 255, 0.55),
+      0 0 28px rgba(0, 212, 255, 0.38),
+      0 0 44px rgba(0, 212, 255, 0.22),
+      0 0 64px rgba(74, 96, 128, 0.1);
+  }
+
+  .card-btn:hover::before {
+    opacity: 1;
+  }
+
+  .card-btn:focus-visible {
+    outline: none;
+    color: #fff;
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.7),
+      0 0 8px rgba(255, 255, 255, 0.3),
+      0 0 16px rgba(0, 212, 255, 0.6),
+      0 0 28px rgba(0, 212, 255, 0.4);
+  }
+
+  .card-btn:focus-visible::before {
+    opacity: 1;
+  }
+
+  /* Touch screens and narrow viewports keep the buttons shown, as a hover may not be possible there */
+  @media (hover: none), screen and (max-width: 1200px) {
+    .card-buttons {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button-card,
+    .card-btn,
+    .card-buttons {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    .button-card {
+      opacity: 1 !important;
+    }
+  }
+}
+
+/* The text zone runs wider than the shared default on desktop and stops growing at the reference width's 88% */
+@media screen and (min-width: 1201px) {
+  .container.portfolio-page .text-zone {
+    width: 88%;
+    max-width: 1590px;
+  }
+}
+
+/* The page keeps the full width, so the text zone starts 10% in on any screen */
+.container.portfolio-page {
+  position: relative;
+  min-height: auto;
+  overflow: visible;
+  top: 0;
+  padding-bottom: 32px;
+}
+
+/* The margins leave room for the <h1>/</h1> decorators above and below */
+.container.portfolio-page h1 {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 1200px) {
+  /* The text zone fills the full width on mobile */
+  .container.portfolio-page .text-zone {
+    max-width: none;
+    padding: 24px 18px;
+  }
+
+  /* A single centred column capped at 460px keeps the cards narrow on tablets and lets them fill phones */
+  .portfolio-page .button-card-container {
+    width: 100%;
+    max-width: none;
+    margin: 8px 0 40px;
+    grid-template-columns: minmax(0, 460px);
+    justify-content: center;
+    gap: 20px;
+  }
+
+  /* A fixed height keeps every card the same size whatever the length of its description */
+  .portfolio-page .button-card {
+    height: 212px;
+  }
+
+  .portfolio-page .card-left {
+    padding-top: 48px;
+    padding-bottom: 10px;
+    justify-content: center;
+  }
+
+  .portfolio-page .card-description.fancy-description {
+    font-size: 17px;
+    line-height: 1.4;
+    padding: 4px 18px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container.portfolio-page h1 {
+    margin-top: 16px;
+    margin-bottom: 44px;
+  }
+
+  /* The return button is last, so the container needs almost no bottom padding */
+  .container.portfolio-page {
+    padding-bottom: 4px;
+  }
+
+  .container.portfolio-page .flat-button {
+    margin-bottom: 10px;
+  }
+}
+
+/* The entrance fades up from slightly below with a subtle scale */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

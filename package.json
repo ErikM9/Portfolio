@@ -1,0 +1,85 @@
+{
+  "name": "portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "animate.css": "^4.1.1",
+    "gsap": "^3.13.0",
+    "loaders.css": "^0.1.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-loaders": "^3.0.1",
+    "react-router-dom": "^6.25.1",
+    "react-scripts": "5.0.1",
+    "sass": "^1.77.8"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@testing-library/dom": "^9.3.4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^14.3.1",
+    "@testing-library/user-event": "^14.6.1",
+    "cypress": "^13.17.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test:coverage": "react-scripts test --watchAll=false --coverage",
+    "eject": "react-scripts eject",
+    "lint": "eslint --max-warnings 0 src cypress cypress.config.js",
+    "cypress:open": "cypress open",
+    "test:e2e": "cypress run"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "cypress/**/*.js"
+        ],
+        "globals": {
+          "cy": "readonly",
+          "Cypress": "readonly"
+        }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 90,
+        "branches": 90,
+        "functions": 90,
+        "lines": 90
+      }
+    },
+    "moduleNameMapper": {
+      "\\.(png|jpg|jpeg|gif|svg|webp)$": "<rootDir>/src/__mocks__/fileMock.js",
+      "\\.(css|scss|sass)$": "<rootDir>/src/__mocks__/fileMock.js"
+    }
+  }
+}

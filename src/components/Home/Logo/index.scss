@@ -1,0 +1,145 @@
+.logo-container {
+  z-index: 0;
+  width: 900px;
+  height: 900px;
+  /* The logo fades in through CSS instead of starting at a static opacity: 0, so it never depends on GSAP to appear */
+  animation: fadeIn 1s both;
+  position: absolute;
+  top: 0;
+  right: -2%;
+  bottom: 0;
+  left: auto;
+  margin: auto;
+
+  /* The solid logo fades in last, after the gear */
+  .solid-logo {
+    position: absolute;
+    left: 0;
+    margin: auto;
+    width: 100%;
+    animation: fadeIn 4s 5s both;
+    z-index: 2;
+  }
+}
+
+/* The gear is anchored to the headline's left edge by a fixed margin, which keeps the gap the same at any width */
+.home-page .gear {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  z-index: 0;
+  left: 10%;
+  margin-left: 407px;
+  top: 50%;
+  transform: translateY(calc(-50% - 43px));
+  animation: fadeIn 2s 4s both;
+  /* The gear is drawn in em, so this font size sets the size of the whole gear */
+  font-size: 11px;
+
+  /* Draws the gear's disc */
+  .gear-rotate {
+    width: 8em;
+    height: 8em;
+    background: #f6f6f6;
+    position: absolute;
+    border-radius: 4em;
+    animation: gear-rotate 16s linear infinite;
+    top: 47.5%;
+    left: 45%;
+    margin-top: -4em;
+    margin-left: -4em;
+  }
+
+  /* Three rotated gradients form the toothed outline */
+  .gear-rotate::before {
+    width: 11.2em;
+    height: 11.2em;
+    background:
+      linear-gradient(
+        0deg,
+        transparent 39%,
+        #f6f6f6 39%,
+        #f6f6f6 61%,
+        transparent 61%
+      ),
+      linear-gradient(
+        60deg,
+        transparent 42%,
+        #f6f6f6 42%,
+        #f6f6f6 58%,
+        transparent 58%
+      ),
+      linear-gradient(
+        120deg,
+        transparent 42%,
+        #f6f6f6 42%,
+        #f6f6f6 58%,
+        transparent 58%
+      );
+    position: absolute;
+    content: '';
+    top: -1.6em;
+    left: -1.6em;
+    border-radius: 5.6em;
+  }
+
+  /* The centre hole is coloured to match the page background */
+  .gear-rotate::after {
+    width: 4em;
+    height: 4em;
+    background: #081020;
+    position: absolute;
+    content: '';
+    top: 2em;
+    left: 2em;
+    border-radius: 2em;
+  }
+}
+
+@keyframes gear-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* The decorative gear is hidden on mobile along with the logo */
+@media screen and (max-width: 1200px) {
+  .home-page .gear {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .gear .gear-rotate {
+    animation: none !important;
+  }
+
+  /* Reduced motion shows the logo and the gear at full opacity straight away */
+  .logo-container,
+  .logo-container .solid-logo,
+  .home-page .gear {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* A 1920px monitor scales the gear about its centre, so this nudges it right to clear the closing h1 decorator */
+@media screen and (min-width: 1808px) and (max-width: 1999px) {
+  .home-page .gear {
+    margin-left: 419px;
+  }
+}
+
+/* Past the reference width the logo and the gear scale up gently with --wide-scale */
+@media screen and (min-width: 1808px) {
+  .logo-container {
+    transform: scale(var(--wide-scale, 1));
+  }
+
+  .home-page .gear {
+    transform: translateY(calc(-50% - 43px)) scale(var(--wide-scale, 1));
+  }
+}
