@@ -1,0 +1,192 @@
+.home-page {
+  .text-zone {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40%;
+    max-height: 90%;
+    z-index: 10;
+  }
+
+  /* The subheading is set in small, widely spaced sans-serif, so it reads as secondary */
+  h2 {
+    color: #8d8d8d;
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 11px;
+    font-family: sans-serif;
+    letter-spacing: 3px;
+    animation: fadeIn 1s 1.8s backwards;
+  }
+
+  .flat-button {
+    margin-top: 25px;
+    margin-right: 15px;
+  }
+
+  /* The cube shows only on mobile, so it is hidden here */
+  .stage-cube-cont {
+    display: none;
+  }
+}
+
+/* Styles the greeting heading and hangs <h1>/</h1> decorators off its edges */
+.home-page h1:has(.text-animate),
+.home-page h1:has(.text-animate-hover) {
+  font-size: 56px;
+  line-height: 53px;
+  margin: 0;
+  font-family: 'Inter Accent';
+  font-weight: 400;
+  position: relative;
+
+  /* The letters are heavy and tightly set, while the decorators keep the heading's regular weight and spacing */
+  .text-animate,
+  .text-animate-hover {
+    font-weight: 750;
+    letter-spacing: -0.045em;
+  }
+
+  &:before {
+    content: '<h1>';
+    /* Empty alt text keeps screen readers from reading the decorator, while older browsers keep the plain value above */
+    content: '<h1>' / '';
+    font-family: 'La Belle Aurore', cursive;
+    color: #00d4ff;
+    font-size: 18px;
+    position: absolute;
+    margin-top: -33.5px;
+    left: -23.5px;
+    opacity: 0.6;
+  }
+
+  &:after {
+    content: '</h1>';
+    content: '</h1>' / '';
+    font-family: 'La Belle Aurore', cursive;
+    color: #00d4ff;
+    font-size: 18px;
+    position: absolute;
+    margin-top: 18px;
+    margin-left: 10px;
+    animation: fadeIn 1s 1.7s backwards;
+    opacity: 0.6;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  /* A flex column stacks the text zone and the cube down one phone screen */
+  .App .container.home-page {
+    display: flex;
+    flex-direction: column;
+    /* Centres the intro and the cube as one group, with any spare height split above and below */
+    justify-content: center;
+    gap: 18px;
+    min-height: 100vh;
+    min-height: var(--mobile-vh, 100svh);
+    box-sizing: border-box;
+  }
+
+  /* The top padding clears the <h1> decorator and the narrow side padding keeps the wide greeting on screen */
+  .home-page .text-zone {
+    position: initial;
+    width: 100%;
+    transform: none;
+    padding: 26px 14px 0;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 10;
+    /* Clipped sideways, so the greeting and its hanging </h1> cannot widen a phone's page as the zoom is worked out */
+    overflow-x: clip;
+  }
+
+  /* The logo is hidden to free vertical space on phones */
+  .home-page .logo-container {
+    display: none;
+  }
+
+  /* The greeting is a centred fit-content block whose text stays left-aligned */
+  .home-page h1:has(.text-animate),
+  .home-page h1:has(.text-animate-hover) {
+    font-size: 32px;
+    line-height: 38px;
+    width: fit-content;
+    margin: 0 auto;
+    text-align: left;
+
+    /* The first line break is hidden, so "Hi," and the name share a row */
+    br:first-of-type {
+      display: none;
+    }
+
+    &:before {
+      left: -30px;
+      right: auto;
+      margin-top: -15px;
+    }
+
+    &:after {
+      margin-left: 1px;
+      margin-top: 21px;
+    }
+  }
+
+  /* The left margin restores the space which the hidden line break removes */
+  .home-page span._13 {
+    margin-left: 0.35em;
+  }
+
+  /* Tighter tracking and a max-width keep the subheading to a few centred rows */
+  .home-page h2 {
+    margin-top: 16px;
+    letter-spacing: 1.2px;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  /* The cube fills the space below the buttons, where the desktop logo sits */
+  .home-page .stage-cube-cont {
+    display: block;
+    position: relative;
+    width: 100%;
+    /* The box clears the 346px space diagonal of the 200px cube, so the cube is never cropped while it rotates */
+    height: 370px;
+    padding-top: 84px;
+    margin: 0;
+    right: auto;
+    /* Hidden overflow keeps any stray 3D overflow from adding a page scrollbar */
+    overflow: hidden;
+    box-sizing: border-box;
+    flex: 0 0 auto;
+  }
+}
+
+/* Reduced motion holds the subheading and the greeting decorators at rest */
+@media (prefers-reduced-motion: reduce) {
+  .home-page h2,
+  .home-page h1:has(.text-animate)::before,
+  .home-page h1:has(.text-animate)::after,
+  .home-page h1:has(.text-animate-hover)::before,
+  .home-page h1:has(.text-animate-hover)::after {
+    animation: none !important;
+  }
+}
+
+/* Short landscape screens let the page flow and scroll instead of filling one screen */
+@media screen and (max-width: 1200px) and (orientation: landscape) {
+  .App .container.home-page {
+    display: block;
+    min-height: 0;
+    padding: 8px 0;
+  }
+}
+
+/* The tall, narrow Z Fold cover screen uses its spare height for a wider gap between the intro and the cube */
+@media screen and (max-width: 360px) and (min-height: 800px) {
+  .App .container.home-page {
+    gap: 40px;
+  }
+}
